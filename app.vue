@@ -1,5 +1,8 @@
 <template>
-  <NuxtPage />
+  <!-- NuxtLayout 要加在這裡 -->
+  <NuxtLayout>
+    <NuxtPage />
+  </NuxtLayout>
 </template>
 
 <style>
