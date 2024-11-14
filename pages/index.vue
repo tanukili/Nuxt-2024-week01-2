@@ -2,21 +2,11 @@
 import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/css/index.css";
 
-const newsList = ref([]);
-const isLoading = ref(false);
+const { newsList, isLoading, getNews } = useHome();
 
 // API 路徑 : https://nuxr3.zeabur.app/api/v1/home/news/
 // 使用 ES6 fetch() 或是 axios.get() 串接 API
 // 切換 isLoading 狀態
-import axios from "axios";
-async function getNews(params) {
-  isLoading.value = !isLoading.value;
-  const res = await axios.get("https://nuxr3.zeabur.app/api/v1/home/news/");
-  if (res.data.status) {
-    newsList.value = [...res.data.result];
-  }
-  isLoading.value = !isLoading.value;
-}
 getNews();
 </script>
 
