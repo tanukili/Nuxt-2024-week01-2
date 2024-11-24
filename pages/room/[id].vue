@@ -5,12 +5,15 @@ const route = useRoute();
 // 串接 API 取得房型詳細資料
 // API path : https://nuxr3.zeabur.app/api/v1/rooms/{id}
 // 將資料渲染至下方的 div.room-page 區塊
-const { data: room } = await useAsyncData("roomInfo", async () => {
-  const res = await $fetch(
-    `https://nuxr3.zeabur.app/api/v1/rooms/${route.params.id}`
-  );
-  return res.result;
-});
+const { data: room } = await useAsyncData(
+  "roomInfo",
+  () => $fetch(`https://nuxr3.zeabur.app/api/v1/rooms/${route.params.id}`),
+  {
+    transform: (res) => {
+      return res.result;
+    },
+  }
+);
 </script>
 
 <template>
