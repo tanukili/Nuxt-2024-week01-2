@@ -30,11 +30,22 @@ const { data: roomObject } = await useFetch(`/rooms/${id}`, {
 <meta name="twitter:description" content="{{ 房型描述 }}">
 <meta name="twitter:image" content="{{房型主圖}}">
 */
+const { name, description, imageUrl, _id } = roomObject.value;
+const title = () => `Freyja | ${name}`;
 
-/*useSeoMeta({
-
+// 使用 getter 來確保 roomObject 變動後會反應在 meta 上
+useSeoMeta({
+  title,
+  description: () => description,
+  ogTitle: title,
+  ogDescription: () => description,
+  ogImage: () => imageUrl,
+  ogUrl: () => `https://freyja.travel.com.tw/room/${_id}`,
+  twitterCard: "summary_large_image",
+  twitterTitle: title,
+  twitterDescription: () => description,
+  twitterImage: () => imageUrl,
 });
-*/
 
 const isProvide = function (isProvideBoolean = false) {
   return isProvideBoolean ? "提供" : "未提供";
