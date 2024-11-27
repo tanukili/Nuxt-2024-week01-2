@@ -17,6 +17,15 @@ const { data: roomObject } = await useFetch(`/rooms/${id}`, {
   },
 });
 
+const {
+  name,
+  _id,
+  imageUrl: headImageUrl,
+  description: headDescription,
+} = roomObject.value;
+const headTitle = computed(() => `Freyja | ${name}`);
+const headSnsUrl = computed(() => `https://freyja.travel.com.tw/room/${_id}`);
+
 /* 
 請將 useSeoMeta({ }) 改成 Nuxt3 SEO 元件的寫法
 重複邏輯的地方可以使用 computed 
@@ -44,6 +53,18 @@ const isProvide = function (isProvideBoolean = false) {
 <template>
   <Head>
     <!-- 請在此處作答，使用元件設定頁面的 SEO Meta  -->
+    <Title>{{ headTitle }}</Title>
+    <Meta name="description" :content="headDescription"></Meta>
+
+    <Meta property="og:title" :content="headTitle"></Meta>
+    <Meta property="og:description" :content="headDescription"></Meta>
+    <Meta property="og:image" :content="headImageUrl"></Meta>
+    <Meta property="og:url" :content="headSnsUrl"></Meta>
+
+    <Meta name="twitter:card" content="summary_large_image"></Meta>
+    <Meta name="twitter:title" :content="headTitle"></Meta>
+    <Meta name="twitter:description" :content="headDescription"></Meta>
+    <Meta name="twitter:image" :content="headImageUrl"></Meta>
   </Head>
 
   <h2>房型詳細頁面</h2>
