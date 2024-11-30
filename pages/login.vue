@@ -1,4 +1,5 @@
 <script setup>
+const router = useRouter();
 const { $swal } = useNuxtApp();
 const userLoginObject = ref({
   email: "",
@@ -27,7 +28,7 @@ const loginAccount = async (requsetBody) => {
       showConfirmButton: false,
       timer: 1500,
     });
-
+    router.push("/orders");
   } catch (error) {
     const { message } = error.response._data;
     $swal.fire({
