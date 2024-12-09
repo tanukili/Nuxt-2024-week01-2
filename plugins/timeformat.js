@@ -8,6 +8,13 @@ export default defineNuxtPlugin((nuxtApp) => {
       el.textContent = `${date.getFullYear()}-${month}-${setformat(
         date.getDate()
       )} ${time}`;
+
+      // 更簡潔的寫法：使用 toLocalString
+      const convertTimeFormat = new Date(binding.value)
+        .toLocaleString("zh-Hant", {
+          hour12: false,
+        })
+        .replaceAll("/", "-");
     },
   });
 });
